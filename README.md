@@ -48,3 +48,12 @@ Create package.json file to store the general information and dependencies for p
 2.4 ESLint:allow developers to discover problems with their JavaScript code without executing it
 
    npm i -D eslint eslint-plugin-react babel-eslint
+   
+   
+ 3 Add webpack.config.js, .eslintrc.js and .babelrc into root path
+ 
+ 4 Change the path incluing into global path variable
+  type vi ~/.bash_profile 
+  export PATH=$PATH:./node_modules/.bin
+  
+ 5
