@@ -58,4 +58,6 @@ Create package.json file to store the general information and dependencies for p
   
   export PATH=$PATH:./node_modules/.bin
   
- 5
+ 5 babel-node server.js
+ 
+ program server.js should run on console
