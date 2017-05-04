@@ -53,7 +53,9 @@ Create package.json file to store the general information and dependencies for p
  3 Add webpack.config.js, .eslintrc.js and .babelrc into root path
  
  4 Change the path incluing into global path variable
-  type vi ~/.bash_profile 
+ 
+  type vi ~/.bash_profile , add below export into file and save
+  
   export PATH=$PATH:./node_modules/.bin
   
  5
