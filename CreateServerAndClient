@@ -67,4 +67,25 @@ import apiRouter from '/api';
 server.use('/api',apiRouter);
 
 
+ EJS:using for generate HTML template with dynimic content
+ ejs is dependency, so using 
+  
+         npm i -S ejs
+ Embeded Javascript <%EJS%>  
+ To set up ejs engine in express:
+ server.set('view engine','ejs');### it will looking at view folder
+ In view folder:
+ create a index.ejs then put html templete and javascript together
+ To use this ejs , in server.js file 
+ 
+ server.get('/',(req,res)=>{
+     res.render('index');
+ });
+ 
+ Then start the server : npm start
+ 
 
+
+
+
+ 
