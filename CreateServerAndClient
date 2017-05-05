@@ -1,0 +1,49 @@
+Reminder:
+Http or Https can use both at client and server
+import https from 'https';
+
+
+##for client part user
+https.request(...);
+https.get(...)
+example:
+https.get('https://github.com/loliiiiipop/setUpForNode/new/master',res =>{
+ console.log(res.statusCode);
+ console.log('headers:', res.headers);
+ res.on('data',chunk=>{
+ console.log(chunk.toString());
+ });
+});
+
+##using http mudule as server:
+
+import http from 'http';
+
+const server=http.createServer();
+server.listen(8080);
+server.on('request',(req,res)=>{
+       res.write("hello\n");
+       setTimeout(()=>{
+       	res.write('i am stream\n');
+       	res.end();
+       },3000);
+       
+});
+
+or supply request event listener callback as a argument to create server itself:
+const server=http.createServer((req,res)=>{
+       res.write("hello\n");
+       setTimeout(()=>{
+       	res.write('i am stream\n');
+       	res.end();
+       },3000);
+       
+});
+server.listen(8080);
+
+Start server:
+babel-node server.js
+
+start client:
+curl http://localhost:8080
+
