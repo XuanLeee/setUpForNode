@@ -71,7 +71,7 @@ server.use('/api',apiRouter);
  ejs is dependency, so using 
   
          npm i -S ejs
- Embeded Javascript <%EJS%>  
+ Embeded Javascript <%EJS%> <%- JS %>  
  To set up ejs engine in express:
  server.set('view engine','ejs');### it will looking at view folder
  In view folder:
