@@ -76,7 +76,14 @@ ng serve will automic import the javascript bundle into index.html
 </script><script type="text/javascript" src="styles.bundle.js"></script><script type="text/javascript" src="vendor.bundle.js">
 </script><script type="text/javascript" src="main.bundle.js"></script></body>
 
-
+When the app start, in the index.html :
+ <app-root>Loading...</app-root> (angular will override the Loading... with new view in the app.component.html)
+ angular will load through app-root which locate in app.component.ts :
+ @Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
 main.ts is using to start bootstrapModule(AppModule) 
 AppModule is from ./app/app.module.ts
 In app.module.ts, @NgModule is using to pass the bootstrap as AppComponent
@@ -85,6 +92,8 @@ AppComponent is in the app.component.ts as :
 export class AppComponent {
  
 }
+
+Then in the app.component.html will attach the html that show in the view
 
 
 
