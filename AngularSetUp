@@ -25,3 +25,11 @@ ng serve is to build source code, for example make typeScript into javaScript
 then go to the localhost:4200
 First app running : app works!
 
+Open the editor:
+1 src/app is the file we need to deal with
+2 app works comes from app.component.ts (.ts is typeScript, which is the high level of javaScript)
+3 if change app works title into something else, server will keep running all the time, rebuild and reload automatic
+4 app.component.html : angular change html code into dom in the run time. 
+5 in angular, we use component to change our page
+
+
