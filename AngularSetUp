@@ -50,5 +50,7 @@ Then go back to the app.component.html:
  
  
 
-
+TypeScript:
+More features than JavaScript
+TypeScript will be compiled to(using cli) JavaScript, then can be run by browser
 
