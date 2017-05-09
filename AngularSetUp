@@ -32,4 +32,23 @@ Open the editor:
 4 app.component.html : angular change html code into dom in the run time. 
 5 in angular, we use component to change our page
 
+In app.component.html:
+Traditional JavaScript need to set up listenner to get the change and value then output, in Angular we can use
+square brackets[],with inside Parentheses () ,also called round brackets. Like this:
+        <input type="text" [(ngModel)]="name">
+        ngModel:Angular command
+Then in app.component.ts we need set up name to connect with app.component.html :
+export class AppComponent {
+  name = '';
+}
+
+Then go back to the app.component.html:
+ output is using double curly brackets{{}}:
+ <p> {{name}} </p>
+ then the page will auto reload with the name type.
+ Most useful feature in angular is auto react with the page:)
+ 
+ 
+
+
 
