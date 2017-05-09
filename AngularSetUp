@@ -71,3 +71,20 @@ In .angular-cli.json file, add bootstrap in styles dependency:
       ]
 rebuild by using ng serve
 
+ng serve will automic import the javascript bundle into index.html
+<script type="text/javascript" src="inline.bundle.js"></script><script type="text/javascript" src="polyfills.bundle.js">
+</script><script type="text/javascript" src="styles.bundle.js"></script><script type="text/javascript" src="vendor.bundle.js">
+</script><script type="text/javascript" src="main.bundle.js"></script></body>
+
+
+main.ts is using to start bootstrapModule(AppModule) 
+AppModule is from ./app/app.module.ts
+In app.module.ts, @NgModule is using to pass the bootstrap as AppComponent
+AppComponent is including these: app.component.css, app.component.html,app.component.spec.ts and app.component.ts
+AppComponent is in the app.component.ts as :
+export class AppComponent {
+ 
+}
+
+
+
