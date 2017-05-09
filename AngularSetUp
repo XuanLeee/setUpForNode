@@ -1,0 +1,17 @@
+Angular  : A command line interface for Angular
+
+sudo npm install -g @angular/cli
+-g: global install
+@angular/cli : the package name
+sudo is only need for linux and mac
+
+
+Create new angular project 
+ng new my-first-app
+ng: refer to angular cli
+
+then cd my-first-app/
+ng serve : build source code, for example make typeScript into javaScript
+then go to the localhost:4200
+First app running : app works!
+
