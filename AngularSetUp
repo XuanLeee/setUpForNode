@@ -54,3 +54,20 @@ TypeScript:
 More features than JavaScript
 TypeScript will be compiled to(using cli) JavaScript, then can be run by browser
 
+
+Using Boostrap:
+CSS and JS framework 
+To add framework like this:
+First way is to import from index.html
+Second way is install with npm:node package management
+             npm install --save bootstrap
+    --save : merge as product dependency
+then can be easily use by import
+
+In .angular-cli.json file, add bootstrap in styles dependency:
+  "styles": [
+        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "styles.css"
+      ]
+rebuild by using ng serve
+
