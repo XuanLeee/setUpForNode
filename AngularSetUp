@@ -95,5 +95,12 @@ export class AppComponent {
 
 Then in the app.component.html will attach the html that show in the view
 
+cli can use command line to create something that can be use by angular.Leave the current cli build open.
+Then :
+
+ng generate component servers
+ng g c servers
+generate can create some element suppport by angular like component
+then cli will create component automatic and update the import and the the @NgModule declearation in the app.module.ts file
 
 
