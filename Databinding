@@ -1,0 +1,12 @@
+Databinding = communication
+
+TypeScript to HTML,using Output Data can be these style:
+1 String Interpolation : {{data}}
+2 Property Binding([property]="data")
+
+HTML to TypeScript, React to user events:
+Event Binding((event)="expression")
+
+Combination of both(including output data and react to event):
+Two-Way-Binding([(ngModel)]="data")
+
