@@ -1,7 +1,27 @@
 Databinding = communication
 
 TypeScript to HTML,using Output Data can be these style:
-1 String Interpolation : {{data}}
+1 String Interpolation : {{data}} example:
+
+<p>This server has id {{serverId}} and the status is {{getServerStatus()}}</p>
+
+import { Component } from '@angular/core';
+
+@Component({
+selector:'app-server',
+templateUrl:'./server.component.html'
+	})
+
+export class ServerComponent{
+	serverId: number =10;
+	serverStatus: string='offline';
+
+getServerStatus(){
+	return this.serverStatus;
+  }
+	
+}
+
 2 Property Binding([property]="data")
 
 HTML to TypeScript, React to user events:
