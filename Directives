@@ -66,3 +66,16 @@ styles:[`
       }
 `]	
 	})
+	
+Outputting lists of <app-server></app-server> in servers.component.thml:
+in servers.component.ts file:
+servers=[]; in the class preperty 
+onCreateServer(){
+    this.serverCreated=true;
+    this.servers.push(this.serverName);// when the button click, push one server
+    into the servers list
+  }
+  
+  then in the servers.component.html
+  <app-server *ngFor="let server of servers"> </app-server>
+
