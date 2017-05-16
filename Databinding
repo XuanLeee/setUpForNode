@@ -50,7 +50,27 @@ onCreateServer(){
 [disabled]="!allowNewServer"
 (click)="onCreateServer()">Add Server</button>
 
+<input type="text" class="form-control"
+(input)="onUpdateServerName($event)">
+<p>{{serverName}}</p>
+
+onUpdateServerName(event: Event){
+    //console.log(event);
+     this.serverName = (<HTMLInputElement>event.target).value;
+  }
+
+$event : reserved variable name can be use anywhere between the "" when the code is 
+executing, get some event resource when execute data
 
 Combination of both(including output data and react to event):
-Two-Way-Binding([(ngModel)]="data")
+Two-Way-Binding([(ngModel)]="data") example:
+<input type="text" 
+class="form-control"
+[(ngModel)="serverName"]
+>
+this ngModel directive did two things:
+1 trigger on the input event and update the value of the server name in the component automaticly
+2 update the value of the input element if we change server name somewhere else
+ngModel: FormsModule (from @angular/forms) needs to be added to your imports[]array 
+in the AppModule(default in the CLI project)!
 
