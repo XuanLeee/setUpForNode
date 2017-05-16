@@ -38,6 +38,16 @@ export class ServersComponent implements OnInit {
 
 HTML to TypeScript, React to user events:
 Event Binding((event)="expression")
+example:
+onCreateServer(){
+    this.serverCreationStatus = 'Server was created';
+  }
+
+
+<button class="btn btn-primary"
+[disabled]="!allowNewServer"
+(click)="onCreateServer()">Add Server</button>
+
 
 Combination of both(including output data and react to event):
 Two-Way-Binding([(ngModel)]="data")
