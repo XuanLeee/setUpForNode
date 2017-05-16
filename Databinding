@@ -22,7 +22,19 @@ getServerStatus(){
 	
 }
 
-2 Property Binding([property]="data")
+2 Property Binding([property]="data"): html element property binding to this native html element enhance
+example:
+export class ServersComponent implements OnInit {
+  allowNewServer=false;
+  
+  constructor() {
+    setTimeout(() => {
+      this.allowNewServer = true;
+      });
+   }
+   <button class="btn btn-primary"
+[disabled]="!allowNewServer">Add Server</button>
+   
 
 HTML to TypeScript, React to user events:
 Event Binding((event)="expression")
