@@ -1,0 +1,50 @@
+in app.component.html
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <hr>
+      <button class="btn btn-primary"
+      (click)="showDetail()">Display Details</button>
+      <p *ngIf="detailInfo">Secret password show up </p>
+
+      <div *ngFor="let num of arrayNum"
+      [ngStyle]="{'background-color' : num >=5?'lightblue':'transparent'}"
+      [ngClass]="{'white-text' : num >= 5 }"
+      >{{num}} </div>
+      
+
+    </div>
+  </div>
+</div>
+
+in app.component.css
+
+.white-text{
+	color : white;
+}
+
+
+in app.component.ts
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls:['./app.component.css']
+})
+export class AppComponent {
+  
+  detailInfo=false;
+  numberClick=0;
+  arrayNum=[];
+  
+
+ showDetail(){
+   this.detailInfo=!this.detailInfo;
+   this.arrayNum.push(this.numberClick);
+   this.numberClick=this.numberClick+1;
+   
+   }
+
+
+}
