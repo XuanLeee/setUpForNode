@@ -48,3 +48,35 @@ export class AppComponent {
 
 
 }
+
+
+
+howDetail(){
+   this.detailInfo=!this.detailInfo;
+   this.arrayNum.push(new Date());
+   this.numberClick=this.numberClick+1;
+   
+   }
+in app.component.html
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <hr>
+      <button class="btn btn-primary"
+      (click)="showDetail()">Display Details</button>
+      <p *ngIf="detailInfo">Secret password show up </p>
+
+      <div *ngFor="let num of arrayNum;let i = index"
+      [ngStyle]="{'background-color' : i >=4?'lightblue':'transparent'}"
+      [ngClass]="{'white-text' : i>= 4 }"
+      >{{num}} </div>
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
