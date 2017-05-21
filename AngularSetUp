@@ -1,0 +1,113 @@
+Angular  : A command line interface for Angular
+ 
+ 
+         sudo npm install -g @angular/cli
+        
+        
+-g: global install
+@angular/cli : the package name
+sudo is only need for linux and mac
+
+
+Create new angular project 
+
+
+        ng new my-first-app
+      
+      
+ng: refer to angular cli
+
+then cd my-first-app/
+
+         ng serve 
+         
+ng serve is to build source code, for example make typeScript into javaScript
+then go to the localhost:4200
+First app running : app works!
+
+Open the editor:
+1 src/app is the file we need to deal with
+2 app works comes from app.component.ts (.ts is typeScript, which is the high level of javaScript)
+3 if change app works title into something else, server will keep running all the time, rebuild and reload automatic
+4 app.component.html : angular change html code into dom in the run time. 
+5 in angular, we use component to change our page
+
+In app.component.html:
+Traditional JavaScript need to set up listenner to get the change and value then output, in Angular we can use
+square brackets[],with inside Parentheses () ,also called round brackets. Like this:
+        <input type="text" [(ngModel)]="name">
+        ngModel:Angular command
+Then in app.component.ts we need set up name to connect with app.component.html :
+export class AppComponent {
+  name = '';
+}
+
+Then go back to the app.component.html:
+ output is using double curly brackets{{}}:
+ <p> {{name}} </p>
+ then the page will auto reload with the name type.
+ Most useful feature in angular is auto react with the page:)
+ 
+ 
+
+TypeScript:
+More features than JavaScript
+TypeScript will be compiled to(using cli) JavaScript, then can be run by browser
+
+
+Using Boostrap:
+CSS and JS framework 
+To add framework like this:
+First way is to import from index.html
+Second way is install with npm:node package management
+             npm install --save bootstrap
+    --save : merge as product dependency
+then can be easily use by import
+
+In .angular-cli.json file, add bootstrap in styles dependency:
+  "styles": [
+        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "styles.css"
+      ]
+rebuild by using ng serve
+
+ng serve will automic import the javascript bundle into index.html
+<script type="text/javascript" src="inline.bundle.js"></script><script type="text/javascript" src="polyfills.bundle.js">
+</script><script type="text/javascript" src="styles.bundle.js"></script><script type="text/javascript" src="vendor.bundle.js">
+</script><script type="text/javascript" src="main.bundle.js"></script></body>
+
+When the app start, in the index.html :
+ <app-root>Loading...</app-root> (angular will override the Loading... with new view in the app.component.html)
+ angular will load through app-root which locate in app.component.ts :
+ @Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+main.ts is using to start bootstrapModule(AppModule) 
+AppModule is from ./app/app.module.ts
+In app.module.ts, @NgModule is using to pass the bootstrap as AppComponent
+AppComponent is including these: app.component.css, app.component.html,app.component.spec.ts and app.component.ts
+AppComponent is in the app.component.ts as :
+export class AppComponent {
+ 
+}
+
+Then in the app.component.html will attach the html that show in the view
+
+cli can use command line to create something that can be use by angular.Leave the current cli build open.
+Then :
+
+ng generate component servers
+ng g c servers
+generate can create some element suppport by angular like component
+then cli will create component automatic and update the import and the the @NgModule declearation in the app.module.ts file
+ng g component recipes --spec false 
+--spec false :don`t create test file
+ ng g component recipes/recipe-list --spec false
+create recipe-list component folder inside recipes
+ 
+
+
+
+

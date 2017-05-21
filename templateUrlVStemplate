@@ -1,0 +1,31 @@
+import { Component } from '@angular/core';
+
+@Component({
+selector:'app-server',
+templateUrl:'./server.component.html'
+	})
+
+export class ServerComponent{
+	
+}
+
+vs
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-servers',
+  template:'<app-server></app-server><app-server></app-server>',
+  styleUrls: ['./servers.component.css']
+})
+export class ServersComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}
+
+Instead using external template file, we can use inline template. Which means we can define html code 
+into typeScript code. Component mush have Template or templateURL. The rest like selector or style are 
+optional.

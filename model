@@ -1,0 +1,45 @@
+If the template will be use a lot, a model.ts file will be good to use
+for the shared model, we can put it in the same level under the app folder
+then it can shared between different sub component.
+How to use:
+In the model.ts file:
+export class Recipe{
+	public name:string;
+	public description : string;
+	public imagePath:string;
+
+	constructor(name:string,desc:string,imagePath:string){
+		this.name=name;
+		this.description=desc;
+		this.imagePath=imagePath;
+	}
+}
+as same as the file below:
+export class Ingredient{
+
+	constructor(public name:stirng,public amount:number){
+
+	}
+}
+
+Then in the component.ts file:
+first:import {Ingredient} from '../shared/ingredient.model';
+then :export class ShoppingListComponent implements OnInit {
+  ingredients : Ingredient[]=[
+     new Ingredient('Apples',5),
+     new Ingredient('Tomatoes',10),
+  ];
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}
+
+Then in the html file :
+<ul class="list-group">
+			<a class="list-group-item" style="cursor : pointer"
+			*ngFor="let ingredient of ingredients">
+				{{ingredient.name}}({{ingredient.amount}})
+			</a>
+		</ul>

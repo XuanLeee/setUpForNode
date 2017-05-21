@@ -1,0 +1,91 @@
+Reminder:
+Http or Https can use both at client and server
+import https from 'https';
+
+
+##for client part user
+https.request(...);
+https.get(...)
+example:
+https.get('https://github.com/loliiiiipop/setUpForNode/new/master',res =>{
+ console.log(res.statusCode);
+ console.log('headers:', res.headers);
+ res.on('data',chunk=>{
+ console.log(chunk.toString());
+ });
+});
+
+##using http mudule as server:
+
+import http from 'http';
+
+const server=http.createServer();
+server.listen(8080);
+server.on('request',(req,res)=>{
+       res.write("hello\n");
+       setTimeout(()=>{
+       	res.write('i am stream\n');
+       	res.end();
+       },3000);
+       
+});
+
+or supply request event listener callback as a argument to create server itself:
+const server=http.createServer((req,res)=>{
+       res.write("hello\n");
+       setTimeout(()=>{
+       	res.write('i am stream\n');
+       	res.end();
+       },3000);
+       
+});
+server.listen(8080);
+
+Start server:
+babel-node server.js
+
+start client:
+curl http://localhost:8080
+
+
+Create server and client by using Express.js library:
+
+const server= express();
+server.use(express.static('public'));
+
+Using api call by using router()
+In api folder (manage all api request in this folder):
+import express from 'express';
+const router=express.Router();
+router.get('/',(req, res)=>{
+ res.send({data:[]});
+});
+export default router;
+
+Then in the server.js:
+import apiRouter from '/api';
+server.use('/api',apiRouter);
+
+
+ EJS:using for generate HTML template with dynimic content
+ ejs is dependency, so using 
+  
+         npm i -S ejs
+ Embeded Javascript <%EJS%> <%- JS %>  
+ To set up ejs engine in express:
+ server.set('view engine','ejs');### it will looking at view folder
+ In view folder:
+ create a index.ejs then put html templete and javascript together
+ To use this ejs , in server.js file 
+ 
+ server.get('/',(req,res)=>{
+     res.render('index');
+ });
+ 
+ Then start the server : npm start
+ 
+
+
+
+
+ 

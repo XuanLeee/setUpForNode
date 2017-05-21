@@ -1,0 +1,6 @@
+How to make the warning gone:
+Everytime using the dynamic array mapping, react need to identify every element with a key.
+Tips:
+Don`t use array index as key.
+Better to use ID
+Try to make it unique.

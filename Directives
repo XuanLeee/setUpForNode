@@ -1,0 +1,81 @@
+Directives: Instructions in the DOM.
+Instruct Angular to add content of business logic into HTML.
+example: component,
+<p appTurnGreen> something </p> : add with attribute selector
+@Directive({
+   selector:'[appTurnGreen]'
+})
+export class TurnGreenDirective{
+...
+}
+
+
+<p *ngIf="">server created, server name is {{serverName}}</p>
+*ngIf: * is required because ngIf is the structure of the directive, it change the 
+structure of the DOM.
+
+<p *ngIf="serverCreated;else noServer">server created, server name is {{serverName}}</p>
+<ng-template #noServer>
+<p>
+No Server was created!
+</p>
+</ng-template>
+#noServer is like a LOCAL marker that use in the ngIf
+<ng-template> is component shipping with angular that can use mark(#) place in the DOM
+
+Unlike structural directives, attribute directives don`t add or remoeve elements
+They only change the element they were placed on.
+import { Component } from '@angular/core';
+
+@Component({
+selector:'app-server',
+templateUrl:'./server.component.html'
+	})
+
+export class ServerComponent{
+	serverId: number =10;
+	serverStatus: string='offline';
+constructor(){
+    this.serverStatus=Math.random()>0.5?'online':'offline';
+ }
+getServerStatus(){
+	return this.serverStatus;
+  }
+  getColor(){
+  	return this.serverStatus ==='online'?'green':'red';
+  }
+	
+}
+
+<p [ngStyle]="{backgroundColor : getColor()}"
+>This server has id {{serverId}} and the status is {{getServerStatus()}}</p>
+
+constructor(){}: method that when the component is created.
+Math.random(): give the number between 0 and 1
+ngSytle: allow dynimic update the style
+[ngSytle]: binding some property on ngStyle directive
+Inside ngStyle:  {key:value}
+
+CSS Classes Dynamically with ngClass:
+<p [ngStyle]="{backgroundColor : getColor()}"
+[ngClass]="{online:serverStatus ==='online'}">This server has id {{serverId}} and the status is {{getServerStatus()}}</p>
+
+styles:[`
+      .online{
+      	color:white;
+      }
+`]	
+	})
+	
+Outputting lists of <app-server></app-server> in servers.component.thml:
+in servers.component.ts file:
+servers=[]; in the class preperty 
+onCreateServer(){
+    this.serverCreated=true;
+    this.servers.push(this.serverName);// when the button click, push one server
+    into the servers list
+  }
+  
+  then in the servers.component.html
+  <app-server *ngFor="let server of servers"> </app-server>
+

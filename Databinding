@@ -1,0 +1,95 @@
+Databinding = communication
+
+TypeScript to HTML,using Output Data can be these style:
+1 String Interpolation : {{data}} example:
+
+<p>This server has id {{serverId}} and the status is {{getServerStatus()}}</p>
+
+import { Component } from '@angular/core';
+
+@Component({
+selector:'app-server',
+templateUrl:'./server.component.html'
+	})
+
+export class ServerComponent{
+	serverId: number =10;
+	serverStatus: string='offline';
+
+getServerStatus(){
+	return this.serverStatus;
+  }
+	
+}
+
+2 Property Binding([property]="data"): html element property binding to this native html element enhance
+example:
+export class ServersComponent implements OnInit {
+  allowNewServer=false;
+  
+  constructor() {
+    setTimeout(() => {
+      this.allowNewServer = true;
+      });
+   }
+   <button class="btn btn-primary"
+[disabled]="!allowNewServer">Add Server</button>
+
+<label>username</label>
+<input type="text" class="form-control"
+[(ngModel)]="username"
+>
+<p>{{username}}</p>
+<button class="btn btn-primary"
+[disabled]="username ===''"
+>Submit</button>
+
+How do you know to which Properties or Events of HTML Elements you may bind?
+You can basically bind to all Properties and Events -
+a good idea is to console.log()  the element you're interested in to see which properties and events it offers.
+
+HTML to TypeScript, React to user events:
+Event Binding((event)="expression")
+example:
+onCreateServer(){
+    this.serverCreationStatus = 'Server was created';
+  }
+
+
+<button class="btn btn-primary"
+[disabled]="!allowNewServer"
+(click)="onCreateServer()">Add Server</button>
+
+<input type="text" class="form-control"
+(input)="onUpdateServerName($event)">
+<p>{{serverName}}</p>
+
+onUpdateServerName(event: Event){
+    //console.log(event);
+     this.serverName = (<HTMLInputElement>event.target).value;
+  }
+
+$event : reserved variable name can be use anywhere between the "" when the code is 
+executing, get some event resource when execute data
+
+<label>username</label>
+<input type="text" class="form-control"
+[(ngModel)]="username"
+>
+<p>{{username}}</p>
+<button class="btn btn-primary"
+[disabled]="username ===''"
+(click)="username =''">Submit</button>
+
+Combination of both(including output data and react to event):
+Two-Way-Binding([(ngModel)]="data") example:
+<input type="text" 
+class="form-control"
+[(ngModel)="serverName"]
+>
+this ngModel directive did two things:
+1 trigger on the input event and update the value of the server name in the component automaticly
+2 update the value of the input element if we change server name somewhere else
+ngModel: FormsModule (from @angular/forms) needs to be added to your imports[]array 
+in the AppModule(default in the CLI project)!
+
