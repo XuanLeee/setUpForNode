@@ -60,3 +60,10 @@ onAddServer() {
      
         });
   }
+
+
+As a summary:
+component communications is key feature of angular.
+@Input : make the property bindedable from outside, from parent component from this component
+@Output: allow parent component using child component to listen to your own event which create in 
+child component
