@@ -1,0 +1,14 @@
+property is only accessable inside same component
+If parent want to access child component element, decerator need to be added
+@Input()
+Also import{ Component, OnInit,Input} from '@angular/core';
+
+Assigning an alias to custom properties
+@Input('srvElement') element:{type:string,name:string,content:string};
+<div class="col-xs-12">
+     <app-server-element *ngFor="let serverElement of serverElements"
+     [srvElement]="serverElement">
+    </app-server-element>
+    </div>
+    
+Element will no longer work after alias the new name to element
