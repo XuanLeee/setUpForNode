@@ -1,0 +1,35 @@
+Two way data binding:
+ 
+      <input type="text"
+       class="form-control" 
+       [(ngModel)]="newServerName">
+       
+Local reference:anything in html
+can use anywhere in the template
+<input type="text"
+       class="form-control" 
+       #severNameInput>
+      <label>Server Content</label>
+      <input type="text" class="form-control" [(ngModel)]="newServerContent">
+      <br>
+      <button
+        class="btn btn-primary"
+        (click)="onAddServer(serverNameInput)">Add Server</button>
+        
+        in ts file:
+        onAddServer(nameInput:HTMLInputElement) {
+
+      this.serverCreated.emit({
+        serverName: nameInput.value,
+        serverContent:this.newServerContent
+     
+        });
+  }
+  Access the html element directly in the ts file:
+  import { Component, OnInit ,EventEmitter,Output,ViewChild ,ElementRef} from '@angular/core';
+  
+ @ViewChild('') serverContentInput:ElementRef;
+ serverContent:this.serverContentInput.nativeElement.value
+ in html 
+ <input type="text" class="form-control" #serverContent>
+ (click)="onAddServer(serverNameInput)">Add Server</button>
