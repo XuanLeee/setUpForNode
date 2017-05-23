@@ -1,0 +1,12 @@
+css is used for whole all the the html dom.
+Using angular will give css only available for the component it belone to. Angular will give different name for
+different css element
+<p _ngcontent-ejo-1> all the document in same component will have _ngcontent-ejo-1
+<p _ngcontent-ejo-2> another will have _ngcontent-ejo-2
+encapsulation: 3 mode can be add in @Component({
+encapsulation : Native 
+              : Emulated (dafult, will using own css)
+              : None (don`t have encapsulation, will use the parent/globle css style)
+              
+})
+
