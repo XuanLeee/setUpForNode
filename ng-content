@@ -1,0 +1,11 @@
+in server-element component, inside html:
+<ng-content></ng-content>
+Then using <app-server-element>
+inside the tag, we can use usually html tag 
+<p>
+            <strong *ngIf="element.type === 'server'" style="color: red">{{ element.content }}</strong>
+            <em *ngIf="element.type === 'blueprint'">{{ element.content }}</em>
+          </p>
+</app-server-element>
+Without <ng-content></ng-content>:
+html will ignore any <p>and html tag between the openning and closing of your own component
