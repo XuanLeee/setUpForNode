@@ -1,0 +1,88 @@
+in shpping-list/shoping-edit html:
+<input
+            type="text"
+            id="name"
+            class="form-control"
+            #nameInput>
+        </div>
+        <div class="col-sm-2 form-group">
+          <label for="amount">Amount</label>
+          <input
+            type="number"
+            id="amount"
+            class="form-control"
+            #amountInput>
+        </div>
+        <div class="row">
+        <div class="col-xs-12">
+          <button class="btn btn-success" type="submit" (click)="onAddItem()">Add</button>
+          <button class="btn btn-danger" type="button">Delete</button>
+          <button class="btn btn-primary" type="button">Clear</button>
+        </div>
+        then in ts file:
+        import shared folder`s template ts file:
+        export class Ingredient {
+  constructor(public name: string, public amount: number) {}
+}
+export class ShoppingEditComponent implements OnInit {
+  @ViewChild('nameInput') nameInputRef: ElementRef;
+  @ViewChild('amountInput') amountInputRef: ElementRef;
+  @Output() ingredientAdded = new EventEmitter<Ingredient>(); //new custom event
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+  onAddItem() {//const will not change once created
+    const ingName = this.nameInputRef.nativeElement.value;//get value from html
+    const ingAmount = this.amountInputRef.nativeElement.value; //get value from html input
+    const newIngredient = new Ingredient(ingName, ingAmount); // put two value together
+    this.ingredientAdded.emit(newIngredient);
+  }
+
+}
+
+then in up level shopping-list.component html file:
+<div class="row">
+  <div class="col-xs-10">
+    <app-shopping-edit
+      (ingredientAdded)="onIngredientAdded($event)"></app-shopping-edit>//using the customed ingredientAdded
+    <hr>
+    <ul class="list-group">
+      <a
+        class="list-group-item"
+        style="cursor: pointer"
+        *ngFor="let ingredient of ingredients"
+      >
+        {{ ingredient.name }} ({{ ingredient.amount }})
+      </a>
+    </ul>
+  </div>
+</div>
+In shopping-list.component.ts file:
+import { Component, OnInit } from '@angular/core';
+
+import { Ingredient } from '../shared/ingredient.model';
+
+@Component({
+  selector: 'app-shopping-list',
+  templateUrl: './shopping-list.component.html',
+  styleUrls: ['./shopping-list.component.css']
+})
+export class ShoppingListComponent implements OnInit {
+  ingredients: Ingredient[] = [
+    new Ingredient('Apples', 5),
+    new Ingredient('Tomatoes', 10),
+  ];
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+  onIngredientAdded(ingredient: Ingredient) {
+    this.ingredients.push(ingredient);//push it into array and show on screen
+  }
+}
+
