@@ -1,0 +1,129 @@
+in /recipes/recipe-list/recipe-item html:
+<a
+  href="#"
+  class="list-group-item clearfix"
+  (click)="onSelected()">
+  <div class="pull-left">
+    <h4 class="list-group-item-heading">{{ recipe.name }}</h4>
+    <p class="list-group-item-text">{{ recipe.description }}</p>
+  </div>
+  <span class="pull-right">
+        <img
+          [src]="recipe.imagePath"
+          alt="{{ recipe.name }}"
+          class="img-responsive"
+          style="max-height: 50px;">
+      </span>
+</a>
+
+then in ts:
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+
+import { Recipe } from '../../recipe.model';
+
+@Component({
+  selector: 'app-recipe-item',
+  templateUrl: './recipe-item.component.html',
+  styleUrls: ['./recipe-item.component.css']
+})
+export class RecipeItemComponent implements OnInit {
+  @Input() recipe: Recipe;
+  @Output() recipeSelected = new EventEmitter<void>();
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+  onSelected() {
+    this.recipeSelected.emit();
+  }
+
+}
+
+then in recipy-list html:
+<div class="row">
+  <div class="col-xs-12">
+    <button class="btn btn-success">New Recipe</button>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-xs-12">
+    <app-recipe-item
+      *ngFor="let recipeEl of recipes"
+      [recipe]="recipeEl"
+      (recipeSelected)="onRecipeSelected(recipeEl)"></app-recipe-item>
+  </div>
+</div>
+
+in ts file:
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+
+import { Recipe } from '../recipe.model';
+
+@Component({
+  selector: 'app-recipe-list',
+  templateUrl: './recipe-list.component.html',
+  styleUrls: ['./recipe-list.component.css']
+})
+export class RecipeListComponent implements OnInit {
+  @Output() recipeWasSelected = new EventEmitter<Recipe>();
+  recipes: Recipe[] = [
+    new Recipe('A Test Recipe', 'This is simply a test', 'https://upload.jpeg'),
+    new Recipe('Another Test Recipe', 'This a test', 'https://.jpeg')
+  ];
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+  onRecipeSelected(recipe: Recipe) {
+   this.recipeWasSelected.emit(recipe);
+  }
+
+}
+
+
+then in recipe component html:
+<div class="row">
+  <div class="col-md-5">
+    <app-recipe-list
+      (recipeWasSelected)="selectedRecipe = $event"></app-recipe-list>
+  </div>
+  <div class="col-md-7">
+    <app-recipe-detail
+      *ngIf="selectedRecipe; else infoText"
+      [recipe]="selectedRecipe"></app-recipe-detail>
+    <ng-template #infoText>
+      <p>Please select a Recipe!</p>
+    </ng-template>
+  </div>
+</div>
+
+in ts:
+
+import { Component, OnInit } from '@angular/core';
+
+import { Recipe } from './recipe.model';
+
+@Component({
+  selector: 'app-recipes',
+  templateUrl: './recipes.component.html',
+  styleUrls: ['./recipes.component.css']
+})
+export class RecipesComponent implements OnInit {
+  selectedRecipe: Recipe;
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}
+
+
+
+
+
