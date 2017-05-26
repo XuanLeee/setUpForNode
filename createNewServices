@@ -1,0 +1,50 @@
+In the recipe folder, create a new file named : recipe.service.ts
+service is normal class, don`t need decarator 
+import {Recipe} from './recipe.model';
+export class RecipeService{
+private recipes:Recipe[]=[
+new Recipe('test','sth','https://sss.jpeg')
+];
+}//set private cannot access from outside class
+getRecipes(){
+return this.recipes.slice();
+}//get recipe outside , slice is create a new array that copy the origin array
+then in the recipes.component.ts:
+add providers in the @Component({
+prividers:[RecipeService]
+})
+then in the recipe-list.component.ts
+import {RecipeService } from '../recipe.service';
+recipes:Recipe[];
+export class RecipelistComponent implements OnInit{
+constructor(private recipeservice:RecipeService){
+}
+ngOnInit(){
+this.recipes=this.recipeService.getRecipes();
+}
+onRecipeSelected(recipe:Recipe){
+ this.recipeWasSelect.emit(recipe);
+ }
+}
+Transfer data between different components:
+in recipe.service: create new event attribute:
+recipeSelected = new EventEmitter<Recipe>();
+in recipe-item.component.ts:
+in constructor( private recipeService:RecipeService){}
+ngOnInit(){
+}
+onSelected(){
+this.recipeService.recipeSelected.emit(this.recipe);
+}
+in recipe.component.ts:
+constructor(private recipeService:RecipeService){
+}
+ngOnInit(){
+this.recipeService.recipeSelected.subscribe(
+(recipe:Recipe)=>{
+this.selectedRecipe=recipe;
+}
+);
+}
+
+
