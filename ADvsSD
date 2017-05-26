@@ -1,0 +1,26 @@
+Attribute Directives:
+1 like the normal HTML Attribute (possibly with databinding or event binding)
+2 Only affect/change the element they are added to
+Structural Directives:
+1 normal HTML Attribute with * (for desugaring)
+2Affect the while area in the Dom(element added/removed)
+
+with the * at the begining, angular transfer the directive into something else:
+<div *ngIf="!onlyOdd"></div>
+as same as:
+<ng-template [ngIf]="!onlyOdd></ng-template>
+define custom structural directives:
+in unlessDirective class:
+@Input() set appUnless(condition: bollean){
+if(!condition){
+this.vcRef.createEmbeddedView(this.templateRef);
+}
+else{
+this.vcRef.clear();
+}
+
+}//condition change will execute this method
+constructor(private templateRef:TemplateRef<any>,private vcRef:ViewContainerRef){
+}
+in html file:
+<div *appUnless=""></div>
