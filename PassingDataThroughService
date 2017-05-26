@@ -1,0 +1,31 @@
+in app/recipe/recipe-detail html page:
+<li><a (click)="onAddToShoppingList()" style="cursor: pointer;">To Shopping List</a></li>
+then in  app/recipe/recipe-detail ts page:
+1 constructor(private recipeService: RecipeService) { }
+2 onAddToShoppingList() {
+    this.recipeService.addIngredientsToShoppingList(this.recipe.ingredients);
+  }
+  
+in recipe.service.ts:
+1addIngredientsToShoppingList(ingredients: Ingredient[]) {
+    this.slService.addIngredients(ingredients);
+  }
+2import { ShoppingListService } from '../shopping-list/shopping-list.service';
+
+@Injectable()
+constructor(private slService: ShoppingListService) {}
+
+  getRecipes() {
+    return this.recipes.slice();
+  }
+  
+then in shopping-list service.ts:
+
+  addIngredients(ingredients: Ingredient[]) {
+    // for (let ingredient of ingredients) {
+    //   this.addIngredient(ingredient);
+    // }
+    this.ingredients.push(...ingredients);//
+    this.ingredientsChanged.emit(this.ingredients.slice());//pass the array copy
+  }
+}
