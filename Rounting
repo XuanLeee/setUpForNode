@@ -1,0 +1,6 @@
+If using different links will refresh the page and lose data. 
+Changing the different pages by routing is good way to avoid reload the page.
+It not restart the application, keep update and fast than reload the page every time.
+routerLink="/somename"
+[routerLink]="[/somename]"
+must be full path with / , or the sub-rounter cannot find the path
