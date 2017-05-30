@@ -72,3 +72,50 @@ ngOnDestroy(){
 this.paramsSubscription.unsubscribe();
 }
 
+How to set up child routes
+in main app.module.ts
+const appRoutes:Routes={
+{path:'servers',component:ServersComponent,children:{
+ {path:':id',component:ServerComponent},
+ {path:':id/edit',component:EditServerComponent}
+}
+'},
+}
+in servers.html:
+<router-outlet></router-outlet> instead of <app-server>//child router need second router-outlet
+also in app.component.html
+<router-outlet></router-outlet>
+
+Query Parameters jump to another component:
+in server.component.html:
+<button class="btn btn-primary" (click)="onEdit()">Edit Server</button>
+in server.component.ts file:
+onEdit() {
+    this.router.navigate(['edit'], {relativeTo: this.route, queryParamsHandling: 'preserve'});
+  }
+Handle the 404 error:
+page not found page:
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-page-not-found',
+  templateUrl: './page-not-found.component.html',
+  styleUrls: ['./page-not-found.component.css']
+})
+export class PageNotFoundComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}
+in html:
+<h3>This page was not found!</h3>
+in app.module.ts:
+{ path: 'not-found', component: ErrorPageComponent, data: {message: 'Page not found!'} },
+  { path: '**', redirectTo: '/not-found' }//using redirector
+ only get redirected, if the full path is ''
+
+
+Another way is handle all the module together by add
