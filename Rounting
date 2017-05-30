@@ -4,3 +4,7 @@ It not restart the application, keep update and fast than reload the page every 
 routerLink="/somename"
 [routerLink]="[/somename]"
 must be full path with / , or the sub-rounter cannot find the path
+in the subfolder
+const appRoutes:Routes=[
+{path:'users'
+}];
