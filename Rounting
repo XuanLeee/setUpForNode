@@ -157,7 +157,7 @@ const appRoutes: Routes = [
 @NgModule({
   imports: [
   
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes,{useHash:true})//useHash will add/#/after the root and will ignore root name change
   ],
   exports: [RouterModule]
 })
