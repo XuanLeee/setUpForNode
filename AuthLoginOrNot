@@ -1,0 +1,154 @@
+  Using Routes with canAcivate: angular will execute these data before load page
+Create auth-guard.service.ts:
+  import {
+  CanActivate,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+  Router,
+  CanActivateChild
+} from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+import { Injectable } from '@angular/core';
+
+import { AuthService } from './auth.service';
+
+@Injectable()//make authService injectable
+export class AuthGuard implements CanActivate, CanActivateChild {
+  constructor(private authService: AuthService, private router: Router) {}
+  //instance a new authService, router is used to navigate to another page 
+  canActivate(route: ActivatedRouteSnapshot, //take two parameter with three type return values, allow code sychonizelly
+              state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+    return this.authService.isAuthenticated()
+      .then(
+        (authenticated: boolean) => {
+          if (authenticated) {
+            return true;
+          } else {
+            this.router.navigate(['/']);//return to root page
+          }
+        }
+      );
+  }
+}
+In another file called auth.service.ts:
+export class AuthService {
+  loggedIn = false;
+
+  isAuthenticated() {
+    const promise = new Promise(
+      (resolve, reject) => {
+        setTimeout(() => {
+          resolve(this.loggedIn);//take 800 to finish
+        }, 800);
+      }
+    );
+    return promise; //return value to AuthGuard
+  }
+
+  login() {
+    this.loggedIn = true;
+  }
+
+  logout() {
+    this.loggedIn = false;
+  }
+}
+Find which page need this auth, go to app-routing.module.ts:
+{
+    path: 'servers',
+    canActivate: [AuthGuard],}// only can accessable when AuthGuard return true
+Also in the app.module.ts:
+in providers:
+ providers: [ServersService, AuthService, AuthGuard],
+ 
+How to protect child Routers with canActivateChild
+in auth-guard.service.ts:
+canActivateChild(route: ActivatedRouteSnapshot,
+                   state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+    return this.canActivate(route, state);
+  }
+  Then in app-routing.codules.ts:
+  In path servers, using:
+  canActivateChild: [AuthGuard]
+
+Fake Auth Service:
+in home.component.html:
+<button class="btn btn-default" (click)="onLogin()">Login</button>
+<button class="btn btn-default" (click)="onLogout()">Logout</button>
+
+then in ts file:
+1 add Router and AuthService in constructor:
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { AuthService } from '../auth.service';
+
+@Component({
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
+})
+export class HomeComponent implements OnInit {
+
+  constructor(private router: Router, private authService: AuthService) { }
+
+  ngOnInit() {
+  }
+
+  onLoadServer(id: number) {
+    // complex calculation
+    this.router.navigate(['/servers', id, 'edit'], {queryParams: {allowEdit: '1'}, fragment: 'loading'});
+  }
+
+  onLogin() {
+    this.authService.login();//set true
+  }
+
+  onLogout() {
+    this.authService.logout();//set fault
+  
+  }
+}
+
+How to control navigaing with canDeactivate:
+ask user before they leaving this page, is all work done:
+in edit-server.component.ts:
+add new paremeter:
+changesSaved=false;
+then in the onUpdateServer(){
+this.changesSaved=true;
+ this.router.navigate(['../'], {relativeTo: this.route});
+}
+Create new file in edit-server:
+can-deactive-guard.service.ts:
+import { Observable } from 'rxjs/Observable';
+import { CanDeactivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+
+export interface CanComponentDeactivate {
+  canDeactivate: () => Observable<boolean> | Promise<boolean> | boolean;
+}
+//using interface in Geniric 
+export class CanDeactivateGuard implements CanDeactivate<CanComponentDeactivate> {
+
+  canDeactivate(component: CanComponentDeactivate,
+                currentRoute: ActivatedRouteSnapshot,
+                currentState: RouterStateSnapshot,
+                nextState?: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+    return component.canDeactivate();
+  }
+}
+inthe edit-server.ts file:
+
+canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
+    if (!this.allowEdit) {
+      return true;
+    }
+    if ((this.serverName !== this.server.name || this.serverStatus !== this.server.status) && !this.changesSaved) {
+      return confirm('Do you want to discard the changes?');//one of name or status change and not save
+    } else {
+      return true;
+    }
+    
+
+    
+  
