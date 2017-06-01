@@ -1,0 +1,12 @@
+ Validators class: https://angular.io/docs/ts/latest/api/forms/index/Validators-class.html - these are all built-in validators
+Two approaches:
+1Template-Driven: Angular infers the Form Object from the DOM
+2Reactive: Form is created programmatically and synchronizeed with DOM
+
+1For the template-driven approach,everything marked with "D" is a directive and can be added to your template.
+2Enable HTML5 validation (by default, Angular disables it by adding the ngNativeValidate  to a control in your template.
+
+Binding:
+1 no binding tell angular input is control
+2 one way binding to give control to default value
+3 two way binding: do something with the value
