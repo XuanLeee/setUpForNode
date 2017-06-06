@@ -1,5 +1,6 @@
 # setUpForNode
 
+![alt tag](https://github.com/loliiiiipop/setUpForNode/blob/master/Main4.png)
 
 Set up environment & configrations:
 
